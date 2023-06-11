@@ -9,7 +9,7 @@ use App\Actions\User\Register as UserRegister;
 use App\Actions\User\GetCurrentLogged as GetCurrentUserLogged;
 use App\Actions\User\UpdateUser;
 use App\Actions\User\DestroyUser;
-use App\Actions\User\GetStores;
+use App\Actions\User\IndexStores;
 use App\Actions\User\NewStore;
 use App\Actions\User\ShowStore;
 use App\Actions\User\UpdateStore;
@@ -18,7 +18,7 @@ use App\Actions\User\DestroyStore;
 // Admin actions
 use App\Actions\Admin\Login as AdminLogin;
 use App\Actions\Admin\GetCurrentLogged as GetCurrentAdminLogged;
-use App\Actions\Admin\GetUsers;
+use App\Actions\Admin\IndexUsers;
 use App\Actions\Admin\ShowUser;
 
 /*
@@ -60,7 +60,7 @@ Route::prefix('users')
 ->group(function(){
 
     // Users
-    Route::get('/', GetUsers::class)->name('index');
+    Route::get('/', IndexUsers::class)->name('index');
     Route::post('/', UserRegister::class)->name('store');
     Route::get('/{user}', ShowUser::class)->name('show');
     Route::put('/{user}', UpdateUser::class)->name('update');
@@ -71,7 +71,7 @@ Route::prefix('users')
     ->name('stores.')
     ->group(function() {
 
-        Route::get('/', GetStores::class)->name('index');
+        Route::get('/', IndexStores::class)->name('index');
         Route::post('/', NewStore::class)->name('store');
         Route::get('/{store}', ShowStore::class)->name('show');
         Route::put('/{store}', UpdateStore::class)->name('update');

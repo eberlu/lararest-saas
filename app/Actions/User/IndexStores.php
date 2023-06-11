@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Response;
 
-class GetStores
+class IndexStores
 {
     use AsAction;
 

@@ -8,7 +8,7 @@ use Lorisleiva\Actions\Concerns\AsAction;
 use Response;
 use App\Models\User;
 
-class GetUsers
+class IndexUsers
 {
     use AsAction;
 
