@@ -2,6 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Actions\User\Login as UserLogin;
+use App\Actions\User\GetCurrentLogged;
+use App\Actions\User\GetStores;
+use App\Actions\User\NewStore;
+use App\Actions\User\ShowStore;
+use App\Actions\User\UpdateStore;
+use App\Actions\User\DestroyStore;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,18 +21,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+// Auth for users
+Route::prefix('auth/user')
+->name('auth.user.')
+->group(function(){
 
-// users
+    Route::post('login', UserLogin::class)->name('login');
+
+    Route::get('/current', GetCurrentLogged::class)->name('current');
+
+});
+
+// Users
 Route::prefix('users')
-    ->name('users.')
-    ->namespace('App\Http\Controllers\User')
-    ->group(fn () => Route::apiInvokables('users'));
-    
-// stores
-Route::prefix('stores')
+->name('users.')
+->group(function(){
+
+    // UserStores
+    Route::prefix('{user}/stores')
     ->name('stores.')
-    ->namespace('App\Http\Controllers\Store')
-    ->group(fn () => Route::apiInvokables('stores'));
+    ->group(function() {
+
+        Route::get('/', GetStores::class)->name('index');
+        Route::post('/', NewStore::class)->name('store');
+        Route::get('/{store}', ShowStore::class)->name('show');
+        Route::put('/{store}', UpdateStore::class)->name('update');
+        Route::delete('/{store}', DestroyStore::class)->name('destroy');
+    });
+
+
+});
