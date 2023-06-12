@@ -14,6 +14,11 @@ use App\Actions\User\NewStore;
 use App\Actions\User\ShowStore;
 use App\Actions\User\UpdateStore;
 use App\Actions\User\DestroyStore;
+use App\Actions\User\Store\IndexCategories;
+use App\Actions\User\Store\StoreCategory;
+use App\Actions\User\Store\ShowCategory;
+use App\Actions\User\Store\UpdateCategory;
+use App\Actions\User\Store\DestroyCategory;
 
 // Admin actions
 use App\Actions\Admin\Login as AdminLogin;
@@ -77,4 +82,16 @@ Route::prefix('users')
         Route::put('/{store}', UpdateStore::class)->name('update');
         Route::delete('/{store}', DestroyStore::class)->name('destroy');
     });
+});
+
+//StoreCategories
+Route::prefix('user-stores/{store}/categories')
+->name('user.stores.categories.')
+->group(function() {
+
+    Route::get('/', IndexCategories::class)->name('index');
+    Route::post('/', StoreCategory::class)->name('store');
+    Route::get('{category}', ShowCategory::class)->name('show');
+    Route::put('{category}', UpdateCategory::class)->name('update');
+    Route::delete('{category}', DestroyCategory::class)->name('destroy');
 });
