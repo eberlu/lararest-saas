@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasUuidAsPrimaryKey;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Category extends Model
+class Product extends Model
 {
     use HasFactory, HasUuidAsPrimaryKey;
 
@@ -18,10 +18,12 @@ class Category extends Model
     protected $fillable = [
         'store_id',
         'name',
+        'price',
+        'description'
     ];
 
-    public function products(): BelongsToMany
+    public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Category::class);
     }
 }
