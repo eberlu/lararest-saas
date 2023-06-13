@@ -8,10 +8,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Traits\HasUuidAsPrimaryKey;
 
 class Admin extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasUuidAsPrimaryKey;
+
+    protected $keyType = 'string';
+
+    public $increment = false;
 
     /**
      * The attributes that are mass assignable.
