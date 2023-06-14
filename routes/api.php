@@ -24,6 +24,8 @@ use App\Actions\User\Store\StoreProduct;
 use App\Actions\User\Store\ShowProduct;
 use App\Actions\User\Store\UpdateProduct;
 use App\Actions\User\Store\DestroyProduct;
+use App\Actions\User\Store\Product\AttachCategory;
+use App\Actions\User\Store\Product\DetachCategory;
 
 // Admin actions
 use App\Actions\Admin\Login as AdminLogin;
@@ -111,4 +113,7 @@ Route::prefix('user-stores/{store}/products')
     Route::get('{product}', ShowProduct::class)->name('show');
     Route::put('{product}', UpdateProduct::class)->name('update');
     Route::delete('{product}', DestroyProduct::class)->name('destroy');
+
+    Route::patch('{product}/attach-category/{category}', AttachCategory::class)->name('attach.category');
+    Route::patch('{product}/detach-category/{category}', DetachCategory::class)->name('detach.category');
 });
