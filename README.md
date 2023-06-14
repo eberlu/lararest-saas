@@ -1,66 +1,59 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Lararest SAAS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+API REST desenvolvida sob o <a href="https://laravel.com/">Laravel Framework</a>.
 
-## About Laravel
+## Objetivos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Desenvolver uma interface REST de roteamento HTTP imaginando um modelo de negócio <a href="https://azure.microsoft.com/pt-br/resources/cloud-computing-dictionary/what-is-saas">SAAS</a>.
+- Oferecer dois níveis de autenticação distintos, administradores (back-office) e usuários (multi-tenancy), utilizando o método de autenticação JWT. 
+- Abandonar controladores "tradicionais" do laravel na camada de comunicação entre a chamada HTTP e o banco, substituindo-os por "Actions".
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Laravel Actions :sparkling_heart:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Alguns anos atrás, encontrei este pacote que mudou minha maneira de trabalhar no laravel, venho usando em praticamente todos os projetos e vejo muitas vantagens em relação a controladores tradicionais,
+começando pela eliminação de "controladores megazórdicos" e lógica de domínio espalhada pelo diretório `app`.
 
-## Learning Laravel
+(Estou ciente da existência dos controladores invocáveis mas eles não são suficiente!)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Aqui está o link do pacotinho milagroso: https://github.com/lorisleiva/laravel-actions
+- Post do autor explicando suas motivações das quais entendi e "abracei": https://lorisleiva.com/why-i-wrote-laravel-actions
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Admin
 
-## Laravel Sponsors
+- Login
+- Obter dados dos usuários cadastros
+- Atualizar usuários ou deletá-los
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Usuários
 
-### Premium Partners
+- Registro livre
+- Login
+- CRUD de lojas
+- CRUD de categorias pertencentes a uma loja
+- CRUD de produtos pertencentes a uma loja
+- Anexar e desanexar produtos a múltiplas categorias da mesma loja
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Instalação e configuração
 
-## Contributing
+- Após o clone, instale as dependências do composer: `composer install`
+- Crei o arquivo `.env` na raíz do projeto copiando o conteúdo do `.env.example` preencha as variáveis relativas ao banco de dados
+- Gere a chave da app: `php artisan key:generate`
+- Gere o JWT secret: `php artisan jwt:secret`
+- Para popular o banco com as factories: `php artisan migrate:fresh --seed`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Dicas
 
-## Code of Conduct
+- Você pode obter uma lista com as rotas registradas em seu terminal, basta digitar `php artisan route:list --path=api`
+- Para obter credências de admin por exemplo ou qualquer outro registro pré-populado no banco, você pode usar o `php artisan tinker` e realizar consultas do eloquent para facilitar seus testes manuais
+- A senha padrão para os usuários e admins pré-populados é `password`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Documentação
+https://eberlu.github.io/lararest-saas/
 
-## Security Vulnerabilities
+## Em breve...
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Testes para features
+- Upload de imagens para produtos
+- Definir thumbnail de produto
